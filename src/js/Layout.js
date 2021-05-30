@@ -11,21 +11,27 @@ export default class Layout extends React.Component{
             id: 3,
             text: '',
             complete: false,
+            check: false,
         };
         this.y = 4;
     }
 
-    handleChange = (e) => {
+    handleTextChange = (e) => {
         this.setState({ text: e.target.value });
     };
 
-    handleClick = (e) => {
+    handleAdd = (e) => {
         this.setState({ 
             id: this.y++,
             text: e.target.value,
             complete: false,
+            checked: false,
         });
         TodoStore.addItem(this.state);
+    };
+
+    handleDelete = (e) => {
+        TodoStore.deleteItem();
     };
 
     render() {
@@ -39,8 +45,9 @@ export default class Layout extends React.Component{
             <div>
                 <h1>Todos</h1>
                 <ul>{TodoComponents}</ul>
-                <input id="tArea" value={this.state.text} onChange={this.handleChange} placeholder="input todo" />
-                <button type="submit" onClick={this.handleClick}>Submit</button>
+                <input id="tArea" value={this.state.text} onChange={this.handleTextChange} placeholder="input todo" />
+                <button type="submit" onClick={this.handleAdd}>Submit</button>
+                <button type="submit" onClick={this.handleDelete}>Delete</button>
             </div>
         );
     }

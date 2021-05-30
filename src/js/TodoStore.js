@@ -7,12 +7,14 @@ class TodoStore extends EventEmitter{
             {
                 id: 1,
                 text: "Football Training",
-                complete: false
+                complete: false,
+                check: false,
             },
             {
                 id: 2,
                 text: "Pay Bills",
-                complete: false
+                complete: false,
+                check: false,
             }
         ];
     }
@@ -23,6 +25,15 @@ class TodoStore extends EventEmitter{
 
     addItem(e){
         this.todos.push(e);
+        console.log(this.todos);
+    }
+
+    deleteItem(e){
+        let x = [];
+        this.todos.map((val,idx) =>{
+            (val != e)? x.push({id:idx, text:val.text, complete:val.complete}):false;
+        })
+        this.todos.pop(e);
         console.log(this.todos);
     }
 

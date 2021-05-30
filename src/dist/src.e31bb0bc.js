@@ -29566,67 +29566,7 @@ if ("development" === 'production') {
 } else {
   module.exports = require('./cjs/react-dom.development.js');
 }
-},{"./cjs/react-dom.development.js":"../node_modules/react-dom/cjs/react-dom.development.js"}],"js/Todo.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-var Todo = /*#__PURE__*/function (_React$Component) {
-  _inherits(Todo, _React$Component);
-
-  var _super = _createSuper(Todo);
-
-  function Todo() {
-    _classCallCheck(this, Todo);
-
-    return _super.apply(this, arguments);
-  }
-
-  _createClass(Todo, [{
-    key: "render",
-    value: function render() {
-      var _this$props = this.props,
-          complete = _this$props.complete,
-          text = _this$props.text;
-      var icon = complete ? "\u2714" : "\u2716";
-      return /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("span", null, text), /*#__PURE__*/_react.default.createElement("span", null, icon));
-    }
-  }]);
-
-  return Todo;
-}(_react.default.Component);
-
-exports.default = Todo;
-},{"react":"../node_modules/react/index.js"}],"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/node_modules/events/events.js":[function(require,module,exports) {
+},{"./cjs/react-dom.development.js":"../node_modules/react-dom/cjs/react-dom.development.js"}],"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/node_modules/events/events.js":[function(require,module,exports) {
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -30139,11 +30079,13 @@ var TodoStore = /*#__PURE__*/function (_EventEmitter) {
     _this.todos = [{
       id: 1,
       text: "Football Training",
-      complete: false
+      complete: false,
+      check: false
     }, {
       id: 2,
       text: "Pay Bills",
-      complete: false
+      complete: false,
+      check: false
     }];
     return _this;
   }
@@ -30159,6 +30101,20 @@ var TodoStore = /*#__PURE__*/function (_EventEmitter) {
       this.todos.push(e);
       console.log(this.todos);
     }
+  }, {
+    key: "deleteItem",
+    value: function deleteItem(e) {
+      var x = [];
+      this.todos.map(function (val, idx) {
+        val != e ? x.push({
+          id: idx,
+          text: val.text,
+          complete: val.complete
+        }) : false;
+      });
+      this.todos.pop(e);
+      console.log(this.todos);
+    }
   }]);
 
   return TodoStore;
@@ -30167,7 +30123,90 @@ var TodoStore = /*#__PURE__*/function (_EventEmitter) {
 var todoStore = new TodoStore();
 var _default = todoStore;
 exports.default = _default;
-},{"events":"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/node_modules/events/events.js"}],"js/Layout.js":[function(require,module,exports) {
+},{"events":"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/node_modules/events/events.js"}],"js/Todo.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _TodoStore = _interopRequireDefault(require("./TodoStore"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var Todo = /*#__PURE__*/function (_React$Component) {
+  _inherits(Todo, _React$Component);
+
+  var _super = _createSuper(Todo);
+
+  function Todo() {
+    var _this;
+
+    _classCallCheck(this, Todo);
+
+    _this = _super.call(this);
+
+    _defineProperty(_assertThisInitialized(_this), "checkBox_Test", function (id) {
+      _this.setState(function (prevState) {
+        return {
+          check: !prevState.check
+        };
+      });
+    });
+
+    _this.state = {
+      check: true
+    };
+    return _this;
+  }
+
+  _createClass(Todo, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          complete = _this$props.complete,
+          text = _this$props.text;
+      var icon = complete ? "\u2714" : "\u2716";
+      return /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("span", null, text), /*#__PURE__*/_react.default.createElement("span", null, icon), /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("input", {
+        type: "checkbox",
+        onChange: this.checkBox_Test,
+        value: this.state.check
+      })));
+    }
+  }]);
+
+  return Todo;
+}(_react.default.Component);
+
+exports.default = Todo;
+},{"react":"../node_modules/react/index.js","./TodoStore":"js/TodoStore.js"}],"js/Layout.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30221,27 +30260,33 @@ var Layout = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this);
 
-    _defineProperty(_assertThisInitialized(_this), "handleChange", function (e) {
+    _defineProperty(_assertThisInitialized(_this), "handleTextChange", function (e) {
       _this.setState({
         text: e.target.value
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleClick", function (e) {
+    _defineProperty(_assertThisInitialized(_this), "handleAdd", function (e) {
       _this.setState({
         id: _this.y++,
         text: e.target.value,
-        complete: false
+        complete: false,
+        checked: false
       });
 
       _TodoStore.default.addItem(_this.state);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleDelete", function (e) {
+      _TodoStore.default.deleteItem();
     });
 
     _this.state = {
       todos: _TodoStore.default.getAll(),
       id: 3,
       text: '',
-      complete: false
+      complete: false,
+      check: false
     };
     _this.y = 4;
     return _this;
@@ -30259,12 +30304,15 @@ var Layout = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, "Todos"), /*#__PURE__*/_react.default.createElement("ul", null, TodoComponents), /*#__PURE__*/_react.default.createElement("input", {
         id: "tArea",
         value: this.state.text,
-        onChange: this.handleChange,
+        onChange: this.handleTextChange,
         placeholder: "input todo"
       }), /*#__PURE__*/_react.default.createElement("button", {
         type: "submit",
-        onClick: this.handleClick
-      }, "Submit"));
+        onClick: this.handleAdd
+      }, "Submit"), /*#__PURE__*/_react.default.createElement("button", {
+        type: "submit",
+        onClick: this.handleDelete
+      }, "Delete"));
     }
   }]);
 
@@ -30314,7 +30362,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "9324" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "14042" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
